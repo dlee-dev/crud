@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import './App.css'; // Import CSS file for styling
 
 function App() {
   const [items, setItems] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
-  // Function to handle adding an item
   const addItem = () => {
     if (inputValue.trim() !== '') {
       setItems([...items, inputValue]);
@@ -12,13 +12,11 @@ function App() {
     }
   };
 
-  // Function to handle deleting an item
   const deleteItem = (index) => {
     const updatedItems = items.filter((_, i) => i !== index);
     setItems(updatedItems);
   };
 
-  // Function to handle updating an item
   const updateItem = (index, newValue) => {
     const updatedItems = [...items];
     updatedItems[index] = newValue;
@@ -27,14 +25,16 @@ function App() {
 
   return (
     <div>
-      <h1>CRUD App with React</h1>
-      <div>
+      <h1 className="title">CRUD App with React</h1>
+      <div className="container">
         <input
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          className="input-field"
+          placeholder="Enter item"
         />
-        <button onClick={addItem}>Add</button>
+        <button className="btn-add" onClick={addItem}>Add</button>
       </div>
       <ul>
         {items.map((item, index) => (
@@ -44,7 +44,7 @@ function App() {
               value={item}
               onChange={(e) => updateItem(index, e.target.value)}
             />
-            <button onClick={() => deleteItem(index)}>Delete</button>
+            <button className="btn-delete" onClick={() => deleteItem(index)}>Delete</button>
           </li>
         ))}
       </ul>
